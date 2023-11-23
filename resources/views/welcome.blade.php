@@ -1,7 +1,7 @@
 @extends('partials.layout')
 @section('title', 'Home page')
 @section('content')
-    <h1>Hello lavarel</h1>
+    <h1>Hello lavarel and hello</h1>
     <ul>
         @for ($i = 0; $i < 10; $i++)
             <li>{{ $i }}</li>
