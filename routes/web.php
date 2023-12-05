@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PublicConrtoller;
+use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PublicConrtoller::class,'index']);
+Route::get('/', [PublicController::class, 'index'])->name('home');
+Route::get('/admin/posts/{post}/view', [PostController::class, 'view'])->name('posts.view');
+Route::resource('/admin/posts', PostController::class);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
