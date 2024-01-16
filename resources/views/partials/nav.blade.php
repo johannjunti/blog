@@ -19,6 +19,7 @@
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li><a href="{{route('home')}}">Home</a></li>
+        @auth
         <li>
           <details>
             <summary>Admin</summary>
@@ -27,6 +28,7 @@
             </ul>
           </details>
         </li>
+        @endauth
       </ul>
     </div>
     <div class="navbar-end">
