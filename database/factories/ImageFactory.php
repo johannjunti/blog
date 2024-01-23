@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Image>
  */
-class PostFactory extends Factory
+class ImageFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,7 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'=> fake()->sentence(),
-            'body'=> fake()->paragraph(10, true),
+            'path'=> 'https://picsum.photos/seed/' . fake()->uuid . '/640/480',
         ];
     }
 }
