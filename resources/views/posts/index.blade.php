@@ -3,6 +3,7 @@
 @section('content')
     <div class="container mx-auto">
         <a class="btn btn-primary" href="{{route('posts.create')}}">Add Post</a>
+        {{$posts->links()}}
         <table class="table table-zebra">
             <thead>
                 <th>Id</th>
@@ -20,7 +21,7 @@
                         <td>{{$post->updated_at}}</td>
                         <td>
                             <div class="join">
-                                <a href="{{route('posts.view', ['post' => $post])}}" class="btn btn-info join-item">View</a>
+                                <button class="btn btn-info join-item">View</button>
                                 <a href="{{route('posts.edit', ['post' => $post])}}" class="btn btn-warning join-item">Edit</a>
                                 <form action="{{route('posts.destroy', ['post' => $post])}}" method="POST">
                                     @csrf
@@ -33,5 +34,6 @@
                 @endforeach
             </tbody>
         </table>
+        {{$posts->links()}}
     </div>
 @endsection

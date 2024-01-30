@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
+
+Route::get('/post/{post}', [PublicController::class, 'post'])->name('post');
+
 Route::get('/admin/posts/{post}/view', [PostController::class, 'view'])->name('posts.view');
+
 Route::resource('/admin/posts', PostController::class);
 
 
