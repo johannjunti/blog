@@ -19,6 +19,20 @@ class Post extends Model
         );
     }
 
+    protected function authHasLiked(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if(auth()->check()){
+                    return $this->likes()->where('user_id', auth()->user()->id)->exists();
+                }
+                return false;
+            }
+
+        );
+    }
+
+
     public function user(){
         return $this->belongsTo(User::class);
     }
@@ -29,5 +43,11 @@ class Post extends Model
     }
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
     }
 }
