@@ -6,6 +6,8 @@ use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
+use Attribute;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
@@ -17,6 +19,11 @@ class PublicController extends Controller
     public function tag(Tag $tag){
         $posts = $tag->posts()->latest()->simplePaginate();
         return view('welcome', compact('posts'));
+    }
+
+    public function user(User $user){
+        $posts = $user->posts()->latest()->simplePaginate();
+        return view('user', compact('posts', 'user'));
     }
 
     public function post(Post $post){
@@ -43,5 +50,27 @@ class PublicController extends Controller
             $like->save();
         }
         return redirect()->back();
+    }
+    public function follow(User $user){
+        if($user->authHasFollowed){
+            $user->followers()->detach(auth()->user());
+        } else {
+            $user->followers()->attach(auth()->user());
+        }
+        return redirect()->back();
+    }
+    public function feed(){
+        $posts = Post::whereIn(
+            'user_id',
+            auth()
+            ->user()
+            ->followees()
+            ->select('id')
+            ->get()
+            ->pluck('id')
+            ->toArray())
+            ->latest()
+            ->simplepaginate();
+        return view('welcome', compact('posts'));
     }
 }

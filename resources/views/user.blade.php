@@ -2,6 +2,18 @@
 @section('title', 'Home page')
 @section('content')
     <div class="container mx-auto">
+        <div class="card bg-base-200 shadow-xl">
+                <div class="card-body">
+                    <h1 class="text-xl">{{$user->name}}</h1>
+                    @if($user->authHasFollowed)
+                    <a class="btn btn-error" href="{{route('follow', ['user'=>$user])}}">Unfollow</a>
+                    @else
+                    <a class="btn btn-primary" href="{{route('follow', ['user'=>$user])}}">Follow</a>
+                    @endif
+                    <p class="text-gray-400"><b>Followers:</b>{{ $user->followers()->count()}}</p>
+                    <p class="text-gray-400"><b>Followees:</b>{{ $user->followees()->count()}}</p>
+                </div>
+        </div>
         {{ $posts->links() }}
         <div class="flex flex-row flex-wrap">
             @foreach ($posts as $post)
