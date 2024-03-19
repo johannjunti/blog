@@ -11,6 +11,8 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'body'];
+    protected $with = ['images', 'user'];
+    protected $append = ['snipped'];
 
     protected function snippet(): Attribute
     {
